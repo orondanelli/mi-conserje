@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 
-import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
@@ -15,7 +15,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon, Package } from "lucide-react"
+import {
+  LayoutDashboardIcon,
+  UsersIcon,
+  PackageIcon,
+  FileTextIcon,
+  Settings2Icon,
+  ShieldCheckIcon,
+} from "lucide-react"
 
 const data = {
   user: {
@@ -27,90 +34,33 @@ const data = {
     {
       title: "Dashboard",
       url: "/",
-      icon: (
-        <LayoutDashboardIcon
-        />
-      ),
+      icon: <LayoutDashboardIcon className="size-4" />,
     },
     {
       title: "Visitas",
       url: "/visitas",
-      icon: (
-        <UsersIcon
-        />
-      ),
+      icon: <UsersIcon className="size-4" />,
     },
     {
       title: "Paquetes",
       url: "/paquetes",
-      icon: (
-        <Package
-        />
-      ),
+      icon: <PackageIcon className="size-4" />,
     },
     {
       title: "Auditoría",
       url: "/auditoria",
-      icon: (
-        <FileTextIcon
-        />
-      ),
+      icon: <FileTextIcon className="size-4" />,
     },
   ],
-  navClouds: [],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: (
-        <CircleHelpIcon
-        />
-      ),
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
-      ),
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: (
-        <DatabaseIcon
-        />
-      ),
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: (
-        <FileChartColumnIcon
-        />
-      ),
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: (
-        <FileIcon
-        />
-      ),
+      title: "Configuración",
+      url: "/configuracion",
+      icon: <Settings2Icon className="size-4" />,
     },
   ],
 }
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -118,18 +68,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
+              asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
-              render={<a href="#" />}
             >
-              <CommandIcon className="size-5!" />
-              <span className="text-base font-semibold">Acme Inc.</span>
+              <Link href="/">
+                <ShieldCheckIcon className="size-5!" />
+                <span className="text-base font-semibold">Mi Conserje</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
