@@ -1,0 +1,46 @@
+export const tokens = {
+  colors: {
+    slate: {
+      50: "#f8fafc",
+      100: "#f1f5f9",
+      200: "#e2e8f0",
+      300: "#cbd5e1",
+      400: "#94a3b8",
+      500: "#64748b",
+      600: "#475569",
+      700: "#334155",
+      800: "#1e293b",
+      900: "#0f172a",
+    },
+    background: "hsl(0 0% 100%)",
+    foreground: "hsl(215 13% 13%)",
+    primary: "hsl(215 28% 17%)",
+    "primary-foreground": "hsl(0 0% 100%)",
+    secondary: "hsl(215 14% 34%)",
+    "secondary-foreground": "hsl(0 0% 100%)",
+    muted: "hsl(215 12% 84%)",
+    "muted-foreground": "hsl(215 8% 40%)",
+    accent: "hsl(215 28% 17%)",
+    "accent-foreground": "hsl(0 0% 100%)",
+    destructive: "hsl(0 84% 60%)",
+    "destructive-foreground": "hsl(0 0% 100%)",
+    border: "hsl(215 13% 90%)",
+    input: "hsl(215 13% 95%)",
+    ring: "hsl(215 28% 17%)",
+  },
+  fonts: {
+    display: '"Inter Tight", system-ui, -apple-system, sans-serif',
+    body: '"Inter", system-ui, -apple-system, sans-serif',
+  },
+  radius: "0.375rem",
+  spacing: {
+    xs: "0.25rem",
+    sm: "0.5rem",
+    md: "1rem",
+    lg: "1.5rem",
+    xl: "2rem",
+    "2xl": "3rem",
+  },
+} as const;
+
+export type DesignTokens = typeof tokens;

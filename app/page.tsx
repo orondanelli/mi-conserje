@@ -1,65 +1,67 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Header } from "@/components/layout/Header";
+import { DashboardStats } from "@/components/dashboard/DashboardStats";
+import { RecentActivity } from "@/components/dashboard/RecentActivity";
+import { QuickActions } from "@/components/dashboard/QuickActions";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Dashboard | mi-conserje",
+  description:
+    "Vista principal del sistema con resumen diario de visitas, paquetes y actividad reciente",
+};
+
+export default function Dashboard() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <Header
+          title="Dashboard"
+          subtitle="Resumen diario del edificio"
+          userName="Orlando Rondanelli"
+          userEmail="orlando.rondanelliortiz@cencosud.cl"
+          userInitials="OR"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <main className="flex-1 overflow-auto">
+          <div className="flex flex-col gap-6 p-4 sm:p-6 lg:p-8">
+            {/* Estadísticas principales */}
+            <section>
+              <DashboardStats
+                visitasHoy={12}
+                paquetesPendientes={5}
+                paquetesEntregadosHoy={8}
+                totalMensual={247}
+                tasaAutorizacion={95}
+              />
+            </section>
+
+            {/* Acciones rápidas y actividad reciente */}
+            <section className="grid gap-6 grid-cols-1 lg:grid-cols-3">
+              {/* Columna izquierda - Acciones rápidas */}
+              <div className="lg:col-span-1">
+                <QuickActions
+                  visitRoute="/visitas"
+                  packageRoute="/paquetes"
+                />
+              </div>
+
+              {/* Columna derecha - Actividad reciente */}
+              <div className="lg:col-span-2">
+                <RecentActivity />
+              </div>
+            </section>
+          </div>
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
