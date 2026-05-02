@@ -11,7 +11,7 @@ interface AuditFiltersProps {
   onChange?: (filters: AuditFilterValues) => void
 }
 
-interface AuditFilterValues {
+export interface AuditFilterValues {
   tipo?: string
   fechaDesde?: string
   fechaHasta?: string

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Header } from "@/components/layout/Header";
 import { AuditTable } from "@/components/audit/AuditTable";
-import { AuditFilters } from "@/components/audit/AuditFilters";
+import { AuditFilters, type AuditFilterValues } from "@/components/audit/AuditFilters";
 import { ExportActions } from "@/components/audit/ExportActions";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AlertCircle, Archive } from "lucide-react";
@@ -13,7 +13,7 @@ export default function AuditoriaPage() {
   const [filters, setFilters] = useState({});
   const [isExporting, setIsExporting] = useState(false);
 
-  const handleFilterChange = (newFilters: Record<string, string | undefined>) => {
+  const handleFilterChange = (newFilters: AuditFilterValues) => {
     setFilters(newFilters);
   };
 

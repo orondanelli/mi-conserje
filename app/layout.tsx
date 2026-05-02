@@ -3,12 +3,12 @@ import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
 
 const fontDisplay = Inter_Tight({
-  variable: "--font-display",
+  variable: "--font-display-stack",
   subsets: ["latin"],
 });
 
 const fontBody = Inter({
-  variable: "--font-body",
+  variable: "--font-body-stack",
   subsets: ["latin"],
 });
 
